@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>1st Quarter Laboratory Exercises</title>
+	<style>
+		body {
+			background-image: url('https://i.pinimg.com/564x/5c/c7/71/5cc771d0f7f38c5ff66001e5dbc1d3b7.jpg');
+			background-size: cover;
+			background-repeat: no-repeat;
+			text-align: center; 
+		}
+
+		h1 {
+			padding: 20px;
+			background-color: #ffffff;
+			border-radius: 5px;
+			width: 800px;
+			border: 4px inset #925F17;
+			padding: 25px;
+			font-size: 28px;
+			margin: 0 auto; 
+		}
+
+		.lab-link {
+			background-color: #ffffff;
+			padding: 10px 20px;
+			border-radius: 5px;
+			width: 450px;
+			border: 3px ridge #925F17;
+			color: #516a8a;
+			text-decoration: none;
+			font-size: 25px;
+			display: block;
+			margin: 10px auto; 
+		}
+		p.footer {
+			background-color: #ffffff;
+			width: 275px;
+			border: 3px groove #925F17;
+			padding: 5px;
+			border-radius: 3px;
+			position: fixed;
+			bottom: 0;
+			left: 50%; 
+			transform: translateX(-50%);
+		}
+	</style>
+</head>
+<body>
+	<h1>1st Quarter Laboratory Exercises</h1>
+	<a class="lab-link" href="file:///C:/Users/Acer/Downloads/CS2%20Labs/mod2-1_Tambak.html">Laboratory Exercise 1</a>
+	<a class="lab-link" href="file:///C:/Users/Acer/Downloads/CS2%20Labs/mod2-2_Tambak.html">Laboratory Exercise 2</a>
+	<a class="lab-link" href="file:///C:/Users/Acer/Downloads/CS2%20Labs/mod2-3_Tambak(main).html">Laboratory Exercise 3</a>
+	<a class="lab-link" href="file:///C:/Users/Acer/Downloads/CS2%20Labs/mod3-1_Tambak.html">Laboratory Exercise 4</a>
+	<p class="footer">Rashanyl M. Tambak, Grade 9 - Lithium</p>
+</body>
+</html>
