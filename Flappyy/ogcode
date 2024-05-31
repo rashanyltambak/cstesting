@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+        }
+
+        #game-container {
+            position: relative;
+            width: fit-content;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            background-image: url('bg.jpg'); /* Set your background image here */
+            background-size: cover;
+        }
+
+        #instructions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Flappy Bird</h1>
+        <canvas id="gameCanvas" width="800" height="500"></canvas>
+        <div id="instructions"></div>
+    </div>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const bird = {
+            x: 50,
+            y: canvas.height / 2,
+            radius: 15,
+            gravity: 0.6,
+            velocity: 0,
+            lift: -12
+        };
+        const pipes = [];
+        const pipeGap = 250;
+        const pipeWidth = 100;
+        let score = 0;
+        let isGameOver = false;
+        let attempts = 0;
+        const maxAttempts = 3;
+        const birdImg = new Image();
+        birdImg.src = 'bird.png'; // Set your bird image file path here
+        birdImg.onload = () => {
+            drawBird();
+        };
+        function drawBird() {
+            ctx.drawImage(birdImg, bird.x - bird.radius, bird.y - bird.radius, bird.radius * 2, bird.radius * 2);
+        }
+        const pipeImg = new Image();
+        pipeImg.src = 'pipe.png'; // Set your pipe image file path here
+        function drawPipes() {
+            for (let i = 0; i < pipes.length; i++) {
+                ctx.drawImage(pipeImg, pipes[i].x, 0, pipeWidth, pipes[i].topHeight);
+                ctx.drawImage(pipeImg, pipes[i].x, pipes[i].topHeight + pipeGap, pipeWidth, canvas.height - pipes[i].topHeight - pipeGap);
+            }
+        }
+        function updatePipes() {
+            for (let i = 0; i < pipes.length; i++) {
+                pipes[i].x -= 2;
+                if (pipes[i].x + pipeWidth < 0) {
+                    pipes.splice(i, 1);
+                    score++;
+                }
+            }
+        }
+        function gameOver() {
+            isGameOver = true;
+            attempts++;
+        }
+        function restartListener(e) {
+            if (e.key === ' ' && attempts < maxAttempts) {
+                if (isGameOver) {
+                    restartGame();
+                } else {
+                    bird.velocity = bird.lift;
+                }
+            }
+        }
+        function restartGame() {
+            pipes.length = 0;
+            bird.y = canvas.height / 2;
+            score = 0;
+            isGameOver = false;
+            gameLoop();
+        }
+        function gameLoop() {
+            if (isGameOver) {
+                ctx.font = '50px Arial';
+                ctx.fillStyle = '#000';
+                ctx.fillText('Game Over', canvas.width / 2 - 150, canvas.height / 2);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawBird();
+                drawPipes();
+                updatePipes();
+                requestAnimationFrame(gameLoop);
+            }
+        }
+        document.addEventListener('keydown', restartListener);
+        gameLoop();
+    </script>
+</body>
+</html>
